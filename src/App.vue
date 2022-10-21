@@ -8,7 +8,7 @@
           :enable-download="false"
           :preview-modal="true"
           :paginate-elements-by-height="1400"
-          filename="print"
+          filename="print.pdf"
           :pdf-quality="2"
           :manual-pagination="false"
           pdf-format="a4"
@@ -291,7 +291,7 @@ export default {
     // },
 
     hasDownloaded(blobPdf) {
-      console.log(`PDF has downloaded yehey`);
+      console.log(`PDF has downloaded`);
       this.pdfDownloaded = true;
       console.log(blobPdf);
     },
