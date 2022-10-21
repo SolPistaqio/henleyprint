@@ -13,7 +13,6 @@
           :manual-pagination="false"
           pdf-format="a4"
           pdf-orientation="portrait"
-          pdf-content-width="800px"
           @progress="onProgress($event)"
           @hasStartedGeneration="hasStartedGeneration()"
           @hasDownloaded="hasGenerated($event)"
@@ -247,7 +246,7 @@ export default {
         rejectedDesc: "",
         email: "",
       },
-      purposes: ["Eusiness", "Travel", "Education"],
+      purposes: ["Business", "Travel", "Education"],
       activePicker: null,
       menu: false,
       requiredRules: [(v) => !!v || "This field is required"],
@@ -275,6 +274,7 @@ export default {
       this.$refs.menu.save(date);
     },
     downloadPdf() {
+      this.$refs.html2Pdf.generatePdf();
       this.$refs.form.validate();
       const valid = this.$refs.form.validate();
       if (valid) {
