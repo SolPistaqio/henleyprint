@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <v-content>
+    <v-main>
       <div id="app" data-app>
         <vue-html2pdf
           :show-layout="false"
@@ -195,7 +195,7 @@
           >
         </v-card>
       </div>
-    </v-content>
+    </v-main>
   </v-app>
 </template>
 

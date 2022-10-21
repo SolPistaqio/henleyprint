@@ -211,7 +211,7 @@ export default {
 <style lang="scss" scoped>
 .pdf-content {
   width: 100%;
-
+  height: 1100px;
   background: #fff;
   padding: 17px 47px 17px 47px;
   font-family: "Times New Roman", Times, serif;
@@ -239,7 +239,13 @@ div .boolfield {
 .bottom p {
   line-height: 1;
   font-size: small;
-
+  padding-bottom: 0px;
   margin-bottom: 0px;
+}
+
+.bottom {
+  position: absolute;
+  left: 47px;
+  top: 1050px;
 }
 </style>
