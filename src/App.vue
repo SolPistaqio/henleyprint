@@ -274,7 +274,6 @@ export default {
       this.$refs.menu.save(date);
     },
     downloadPdf() {
-      this.$refs.html2Pdf.generatePdf();
       this.$refs.form.validate();
       const valid = this.$refs.form.validate();
       if (valid) {
