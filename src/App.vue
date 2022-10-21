@@ -5,8 +5,8 @@
         <vue-html2pdf
           :show-layout="false"
           :float-layout="true"
-          :enable-download="false"
-          :preview-modal="true"
+          :enable-download="true"
+          :preview-modal="false"
           :paginate-elements-by-height="1400"
           filename="print.pdf"
           :pdf-quality="2"
@@ -16,7 +16,7 @@
           pdf-content-width="800px"
           @progress="onProgress($event)"
           @hasStartedGeneration="hasStartedGeneration()"
-          @hasGenerated="hasGenerated($event)"
+          @hasDownloaded="hasGenerated($event)"
           ref="html2Pdf"
         >
           <pdf-content
@@ -119,20 +119,26 @@
               <v-text-field
                 v-model="form.nameAndAddress"
                 label="Business name and address"
+                hint="Name of the company and its address"
+                persistent-hint
                 :rules="requiredRules"
                 required
               ></v-text-field>
 
-              <v-text-field
+              <v-select
                 v-model="form.purpose"
                 label="Purpose of seeking alternative citizenship / residence"
+                :items="purposes"
                 :rules="requiredRules"
                 required
-              ></v-text-field>
+              >
+              </v-select>
 
               <v-text-field
                 v-model="form.program"
                 label="Program of interest"
+                hint="Country of application"
+                persistent-hint
                 :rules="requiredRules"
                 required
               ></v-text-field>
@@ -140,6 +146,18 @@
               <v-radio-group
                 v-model="form.pep"
                 label="Are you a Politically Exposed Person (“PEP”)?"
+                hint="A PEP is a current or former (during the past
+          ten years) senior official in the executive, legislative,
+          administrative, military, or judicial branch of the state (elected or
+          not), a senior official of a major political party, a senior executive
+          of a government owned commercial enterprise, and/or being a
+          corporation, business or other entity formed by or for the benefit of
+          any such individual; an immediate family member of such individual,
+          meaning spouse, parents, siblings, children, and spouse’s parents or
+          siblings, or any individual publicly known (or actually known by the
+          relevant financial institution) to be a close personal or professional
+          associate."
+                persistent-hint
                 :rules="requiredRulesRadio"
                 required
                 row
@@ -229,7 +247,7 @@ export default {
         rejectedDesc: "",
         email: "",
       },
-
+      purposes: ["Eusiness", "Travel", "Education"],
       activePicker: null,
       menu: false,
       requiredRules: [(v) => !!v || "This field is required"],
@@ -303,6 +321,13 @@ export default {
 
     onBlobGenerate(blob) {
       console.log(blob);
+    },
+
+    hasGenerated(blob) {
+      console.log(blob);
+      const fileURL = URL.createObjectURL(blob);
+      const pdfWindow = window.open();
+      pdfWindow.location.href = fileURL;
     },
   },
 
