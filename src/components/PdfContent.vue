@@ -213,6 +213,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@page {
+  size: A4 portrait;
+  margin: 16mm;
+}
+
+@page portrait {
+  size: A4 portrait;
+}
+
 .pdf-content {
   width: 100%;
   height: 1100px;
