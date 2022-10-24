@@ -8,7 +8,7 @@
           :enable-download="true"
           :preview-modal="false"
           :paginate-elements-by-height="1400"
-          filename="print.pdf"
+          filename="Form A printout"
           :pdf-quality="2"
           :manual-pagination="false"
           pdf-format="a4"
@@ -116,10 +116,17 @@
               ></v-text-field>
 
               <v-text-field
-                v-model="form.nameAndAddress"
-                label="Business name and address"
-                hint="Name of the company and its address"
-                persistent-hint
+                v-model="form.businessName"
+                label="Business name"
+                hint="Name of the company"
+                :rules="requiredRules"
+                required
+              ></v-text-field>
+
+              <v-text-field
+                v-model="form.businessAddress"
+                label="Business address"
+                hint="Company's address"
                 :rules="requiredRules"
                 required
               ></v-text-field>
@@ -236,7 +243,8 @@ export default {
         address: "",
         occupation: "",
         activities: "",
-        nameAndAddress: "",
+        businessName: "",
+        businessAddress: "",
         purpose: "",
         program: "",
         pep: "",

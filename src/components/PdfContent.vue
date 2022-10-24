@@ -81,7 +81,8 @@
           <p>Business name and address:</p>
           <div class="field">
             <span>
-              {{ form.nameAndAddress }}
+              {{ form.businessName }} <br />
+              {{ form.businessAddress }}
             </span>
           </div>
           <p>Purpose of seeking alternative citizenship / residence:</p>
@@ -230,6 +231,7 @@ export default {
   font-family: "Times New Roman", Times, serif;
   font-weight: 200;
   line-height: 1.3;
+  font-size: 14px;
 }
 p,
 h1 {
