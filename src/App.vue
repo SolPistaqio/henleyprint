@@ -27,6 +27,7 @@
         <v-card class="mx-auto" max-width="800">
           <v-card-text>
             <v-form ref="form" v-model="valid" lazy-validation>
+              <h2>CLIENT (CONTRACTING PARTY)</h2>
               <v-text-field
                 v-model="form.firstname"
                 :rules="requiredRules"
@@ -122,7 +123,7 @@
                 :rules="requiredRules"
                 required
               ></v-text-field>
-
+              <!-- Add County ZIP Stree etc -->
               <v-text-field
                 v-model="form.businessAddress"
                 label="Business address"
@@ -209,6 +210,247 @@
                 :rules="requiredRules"
                 required
               ></v-textarea>
+
+              <v-radio-group
+                v-model="form.rejectedByHenley"
+                label="Have you or has one of your dependents ever been rejected
+by a Henley & Partners office to become a client?"
+                :rules="requiredRulesRadio"
+                required
+                row
+              >
+                <v-radio label="No" :value="false"></v-radio>
+                <v-radio label="Yes" :value="true"></v-radio>
+              </v-radio-group>
+
+              <v-textarea
+                v-if="form.rejectedByHenley"
+                v-model="form.rejectedByHenleyDesc"
+                label="Please enter the name of the Henley & Partners office"
+                :rules="requiredRules"
+                required
+              ></v-textarea>
+
+              <v-radio-group
+                v-model="form.clientOfHenley"
+                label="Have you or has one of your dependents been a client of
+Henley & Partners before?"
+                :rules="requiredRulesRadio"
+                required
+                row
+              >
+                <v-radio label="No" :value="false"></v-radio>
+                <v-radio label="Yes" :value="true"></v-radio>
+              </v-radio-group>
+
+              <v-textarea
+                v-if="form.clientOfHenley"
+                v-model="form.clientOfHenleyDesc"
+                label="Please enter the name of the Henley &
+Partners office and program of interest:"
+                :rules="requiredRules"
+                required
+              ></v-textarea>
+              <v-row>
+                <v-col> <h2>FAMILY MEMBERS</h2></v-col>
+                <v-col>
+                  <v-btn @click="addDependent" color="secondary">
+                    Add family member
+                  </v-btn></v-col
+                >
+              </v-row>
+
+              <div v-for="(dependent, index) in form.dependents" :key="index">
+                <v-text-field
+                  v-model="form.dependent.firstname"
+                  :rules="requiredRules"
+                  label="First name(s)"
+                  required
+                ></v-text-field>
+
+                <v-text-field
+                  v-model="form.dependent.lastname"
+                  :rules="requiredRules"
+                  label="Last name"
+                  required
+                ></v-text-field>
+
+                <v-select
+                  v-model="form.dependent.relationship"
+                  label="Relationship"
+                  :items="relationships"
+                  :rules="requiredRules"
+                  required
+                >
+                </v-select>
+              </div>
+              <h2>BANKING REFERENCE</h2>
+
+              <v-text-field
+                v-model="form.bankName"
+                :rules="requiredRules"
+                label="Account in name of (should be in your personal name)"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="form.iban"
+                :rules="requiredRules"
+                label="Account Number or IBAN)"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="form.swift"
+                :rules="requiredRules"
+                label="SWIFT code"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="form.bank"
+                :rules="requiredRules"
+                label="Bank name"
+                required
+              ></v-text-field>
+              <v-text-field
+                v-model="form.bankAddress"
+                :rules="requiredRules"
+                label="Bank location"
+                required
+              ></v-text-field>
+              <h2>BENEFICIAL OWNER DECLARATION</h2>
+              <p class="mt-3">I the undersigned herewith declare:</p>
+              <v-radio-group
+                v-model="form.beneficiary"
+                :rules="requiredRulesRadio"
+                required
+                row
+              >
+                <v-radio
+                  label="I am the ultimate beneficial owner of all funds remitted to Henley"
+                  :value="false"
+                ></v-radio>
+                <v-radio
+                  label="I am not the beneficial owner"
+                  :value="true"
+                ></v-radio>
+              </v-radio-group>
+              <div v-if="form.beneficiary">
+                <p>
+                  The ultimate beneficial owner(s) of all funds remitted to
+                  Henley is (are):
+                </p>
+                <div
+                  v-for="(beneficiary, index) in form.beneficiaries"
+                  :key="index"
+                >
+                  <v-text-field
+                    v-model="form.beneficiary.firstname"
+                    :rules="requiredRules"
+                    label="First name(s)"
+                    required
+                  ></v-text-field>
+
+                  <v-text-field
+                    v-model="form.beneficiary.othername"
+                    :rules="requiredRules"
+                    label="Other name(s)"
+                    required
+                  ></v-text-field>
+
+                  <v-text-field
+                    v-model="form.beneficiary.lastname"
+                    :rules="requiredRules"
+                    label="Last name"
+                    required
+                  ></v-text-field>
+                  <v-text-field
+                    v-model="form.beneficiary.nationality"
+                    label="Nationality"
+                    :rules="requiredRules"
+                    required
+                  ></v-text-field>
+
+                  <v-text-field
+                    v-model="form.beneficiary.placeOfBirth"
+                    label="Place of birth"
+                    :rules="requiredRules"
+                    required
+                  ></v-text-field>
+                  <!-- FIX! -->
+                  <v-menu
+                    ref="menu"
+                    v-model="form.beneficiary.menu"
+                    :close-on-content-click="false"
+                    transition="scale-transition"
+                    offset-y
+                    min-width="auto"
+                  >
+                    <template v-slot:activator="{ on, attrs }">
+                      <v-text-field
+                        v-model="form.beneficiary.date"
+                        label="Date of birth"
+                        readonly
+                        v-bind="attrs"
+                        v-on="on"
+                        :rules="requiredRules"
+                      ></v-text-field>
+                    </template>
+                    <v-date-picker
+                      v-model="form.beneficiary.date"
+                      :active-picker.sync="activePicker"
+                      max="2000-01-01"
+                      min="1950-01-01"
+                      @change="save"
+                    ></v-date-picker>
+
+                    <v-text-field
+                      v-model="form.beneficiary.businessName"
+                      label="Business name"
+                      hint="Name of the company"
+                      :rules="requiredRules"
+                      required
+                    ></v-text-field>
+                    <!-- Add County ZIP Stree etc -->
+                    <v-text-field
+                      v-model="form.beneficiary.businessAddress"
+                      label="Business address"
+                      hint="Company's address"
+                      :rules="requiredRules"
+                      required
+                    ></v-text-field>
+                    <v-text-field
+                      v-model="form.beneficiary.address"
+                      label="Permanent residential address:"
+                      :rules="requiredRules"
+                      required
+                    ></v-text-field>
+                  </v-menu>
+
+                  <v-select
+                    v-model="form.beneficiary.relationship"
+                    label="Relationship"
+                    :items="relationships"
+                    :rules="requiredRules"
+                    required
+                  >
+                  </v-select>
+                </div>
+                <v-btn @click="addBeneficiaries" color="secondary">
+                  Add beneficial owner
+                </v-btn>
+              </div>
+              <h2>CONSENT</h2>
+              <v-checkbox
+                v-model="processing"
+                :rules="requiredRules"
+                required
+                label="I hereby give consent to Henley processing the Sensitive Data required by or provided to Henley."
+              ></v-checkbox>
+              <v-checkbox
+                v-model="data"
+                :rules="requiredRules"
+                required
+                label="I hereby confirm that I am fully authorized by all persons named herein to give such consent on their behalf to Henley processing their Sensitive Data. I agree to provide Henley with a written confirmation of such person’s consent upon Henley’s request."
+              ></v-checkbox>
             </v-form>
           </v-card-text>
 
@@ -241,6 +483,7 @@ export default {
         placeOfBirth: "",
         date: null,
         address: "",
+        email: "",
         occupation: "",
         activities: "",
         businessName: "",
@@ -252,11 +495,40 @@ export default {
         associationDesc: "",
         rejected: "",
         rejectedDesc: "",
-        email: "",
+        rejectedByHenley: "",
+        rejectedByHenleyDesc: "",
+        clientOfHenley: "",
+        clientOfHenleyDesc: "",
+        dependents: [],
+        bankName: "",
+        iban: "",
+        swift: "",
+        bank: "",
+        bankAddress: "",
+        beneficiary: "",
+        beneficiaries: [
+          {
+            firstname: "",
+            lastname: "",
+            othername: "",
+            nationality: "",
+            placeOfBirth: "",
+            date: null,
+            address: "",
+            businessName: "",
+            businessAddress: "",
+            relationship: "",
+            menu: false,
+          },
+        ],
+        processing: "",
+        data: "",
       },
       purposes: ["Business", "Travel", "Education"],
+      relationships: ["Mother", "Father", "Child"],
       activePicker: null,
       menu: false,
+
       requiredRules: [(v) => !!v || "This field is required"],
       requiredRulesRadio: [
         (v) => typeof v === "boolean" || "This field is required",
@@ -280,6 +552,27 @@ export default {
   methods: {
     save(date) {
       this.$refs.menu.save(date);
+    },
+    addDependent() {
+      this.form.dependents.push({
+        firstname: "",
+        lastname: "",
+        relationship: "",
+      });
+    },
+    addBeneficiaries() {
+      this.form.beneficiaries.push({
+        firstname: "",
+        lastname: "",
+        othername: "",
+        nationality: "",
+        placeOfBirth: "",
+        date: null,
+        address: "",
+        businessName: "",
+        businessAddress: "",
+        relationship: "",
+      });
     },
     async downloadPdf() {
       this.$refs.form.validate();
