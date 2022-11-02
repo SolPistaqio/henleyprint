@@ -262,21 +262,21 @@ Partners office and program of interest:"
 
               <div v-for="(dependent, index) in form.dependents" :key="index">
                 <v-text-field
-                  v-model="form.dependent.firstname"
+                  v-model="dependent.firstname"
                   :rules="requiredRules"
                   label="First name(s)"
                   required
                 ></v-text-field>
 
                 <v-text-field
-                  v-model="form.dependent.lastname"
+                  v-model="dependent.lastname"
                   :rules="requiredRules"
                   label="Last name"
                   required
                 ></v-text-field>
 
                 <v-select
-                  v-model="form.dependent.relationship"
+                  v-model="dependent.relationship"
                   label="Relationship"
                   :items="relationships"
                   :rules="requiredRules"
@@ -343,90 +343,46 @@ Partners office and program of interest:"
                   :key="index"
                 >
                   <v-text-field
-                    v-model="form.beneficiary.firstname"
+                    v-model="beneficiary.firstname"
                     :rules="requiredRules"
                     label="First name(s)"
                     required
                   ></v-text-field>
 
                   <v-text-field
-                    v-model="form.beneficiary.othername"
+                    v-model="beneficiary.othername"
                     :rules="requiredRules"
                     label="Other name(s)"
                     required
                   ></v-text-field>
 
                   <v-text-field
-                    v-model="form.beneficiary.lastname"
+                    v-model="beneficiary.lastname"
                     :rules="requiredRules"
                     label="Last name"
                     required
                   ></v-text-field>
                   <v-text-field
-                    v-model="form.beneficiary.nationality"
+                    v-model="beneficiary.nationality"
                     label="Nationality"
                     :rules="requiredRules"
                     required
                   ></v-text-field>
 
                   <v-text-field
-                    v-model="form.beneficiary.placeOfBirth"
+                    v-model="beneficiary.placeOfBirth"
                     label="Place of birth"
                     :rules="requiredRules"
                     required
                   ></v-text-field>
-                  <!-- FIX! -->
-                  <v-menu
-                    ref="menu"
-                    v-model="form.beneficiary.menu"
-                    :close-on-content-click="false"
-                    transition="scale-transition"
-                    offset-y
-                    min-width="auto"
-                  >
-                    <template v-slot:activator="{ on, attrs }">
-                      <v-text-field
-                        v-model="form.beneficiary.date"
-                        label="Date of birth"
-                        readonly
-                        v-bind="attrs"
-                        v-on="on"
-                        :rules="requiredRules"
-                      ></v-text-field>
-                    </template>
-                    <v-date-picker
-                      v-model="form.beneficiary.date"
-                      :active-picker.sync="activePicker"
-                      max="2000-01-01"
-                      min="1950-01-01"
-                      @change="save"
-                    ></v-date-picker>
 
-                    <v-text-field
-                      v-model="form.beneficiary.businessName"
-                      label="Business name"
-                      hint="Name of the company"
-                      :rules="requiredRules"
-                      required
-                    ></v-text-field>
-                    <!-- Add County ZIP Stree etc -->
-                    <v-text-field
-                      v-model="form.beneficiary.businessAddress"
-                      label="Business address"
-                      hint="Company's address"
-                      :rules="requiredRules"
-                      required
-                    ></v-text-field>
-                    <v-text-field
-                      v-model="form.beneficiary.address"
-                      label="Permanent residential address:"
-                      :rules="requiredRules"
-                      required
-                    ></v-text-field>
-                  </v-menu>
+                  <calendar-input
+                    v-model="beneficiary.date"
+                    :valid="beneficiary.date ? true : false"
+                  />
 
                   <v-select
-                    v-model="form.beneficiary.relationship"
+                    v-model="beneficiary.relationship"
                     label="Relationship"
                     :items="relationships"
                     :rules="requiredRules"
@@ -440,13 +396,13 @@ Partners office and program of interest:"
               </div>
               <h2>CONSENT</h2>
               <v-checkbox
-                v-model="processing"
+                v-model="form.processing"
                 :rules="requiredRules"
                 required
                 label="I hereby give consent to Henley processing the Sensitive Data required by or provided to Henley."
               ></v-checkbox>
               <v-checkbox
-                v-model="data"
+                v-model="form.data"
                 :rules="requiredRules"
                 required
                 label="I hereby confirm that I am fully authorized by all persons named herein to give such consent on their behalf to Henley processing their Sensitive Data. I agree to provide Henley with a written confirmation of such person’s consent upon Henley’s request."
@@ -468,6 +424,7 @@ Partners office and program of interest:"
 <script>
 import PdfContent from "@/components/PdfContent";
 import VueHtml2pdf from "vue-html2pdf";
+import CalendarInput from "./components/CalendarInput.vue";
 
 export default {
   name: "app",
@@ -528,7 +485,7 @@ export default {
       relationships: ["Mother", "Father", "Child"],
       activePicker: null,
       menu: false,
-
+      menuBeneficiary: false,
       requiredRules: [(v) => !!v || "This field is required"],
       requiredRulesRadio: [
         (v) => typeof v === "boolean" || "This field is required",
@@ -553,6 +510,7 @@ export default {
     save(date) {
       this.$refs.menu.save(date);
     },
+
     addDependent() {
       this.form.dependents.push({
         firstname: "",
@@ -575,7 +533,6 @@ export default {
       });
     },
     async downloadPdf() {
-      this.$refs.form.validate();
       const valid = this.$refs.form.validate();
       if (valid) {
         await this.$refs.html2Pdf.generatePdf();
@@ -634,6 +591,7 @@ export default {
   components: {
     VueHtml2pdf,
     PdfContent,
+    CalendarInput,
   },
 };
 </script>
