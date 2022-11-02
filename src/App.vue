@@ -88,12 +88,12 @@
                 ></v-date-picker>
               </v-menu>
 
-              <v-text-field
+              <address-input
                 v-model="form.address"
-                label="Permanent residential address:"
+                label="Permanent residential address"
                 :rules="requiredRules"
                 required
-              ></v-text-field>
+              />
 
               <v-text-field
                 v-model="form.email"
@@ -123,14 +123,13 @@
                 :rules="requiredRules"
                 required
               ></v-text-field>
-              <!-- Add County ZIP Stree etc -->
-              <v-text-field
+
+              <address-input
                 v-model="form.businessAddress"
                 label="Business address"
-                hint="Company's address"
                 :rules="requiredRules"
                 required
-              ></v-text-field>
+              />
 
               <v-select
                 v-model="form.purpose"
@@ -310,12 +309,13 @@ Partners office and program of interest:"
                 label="Bank name"
                 required
               ></v-text-field>
-              <v-text-field
+
+              <address-input
                 v-model="form.bankAddress"
-                :rules="requiredRules"
                 label="Bank location"
+                :rules="requiredRules"
                 required
-              ></v-text-field>
+              />
               <h2>BENEFICIAL OWNER DECLARATION</h2>
               <p class="mt-3">I the undersigned herewith declare:</p>
               <v-radio-group
@@ -390,7 +390,7 @@ Partners office and program of interest:"
                   >
                   </v-select>
                 </div>
-                <v-btn @click="addBeneficiaries" color="secondary">
+                <v-btn @click="addBeneficiaries" color="secondary" class="my-4">
                   Add beneficial owner
                 </v-btn>
               </div>
@@ -425,6 +425,7 @@ Partners office and program of interest:"
 import PdfContent from "@/components/PdfContent";
 import VueHtml2pdf from "vue-html2pdf";
 import CalendarInput from "./components/CalendarInput.vue";
+import AddressInput from "./components/AddressInput.vue";
 
 export default {
   name: "app",
@@ -592,6 +593,7 @@ export default {
     VueHtml2pdf,
     PdfContent,
     CalendarInput,
+    AddressInput,
   },
 };
 </script>
