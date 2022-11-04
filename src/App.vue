@@ -1,4 +1,5 @@
 <template>
+  <!-- add steps!!  -->
   <v-app>
     <v-main>
       <div id="app" data-app>
@@ -10,7 +11,7 @@
           :paginate-elements-by-height="1400"
           filename="Form A printout"
           :pdf-quality="2"
-          :manual-pagination="false"
+          :manual-pagination="true"
           pdf-format="a4"
           pdf-orientation="portrait"
           @progress="onProgress($event)"
@@ -250,14 +251,17 @@ Partners office and program of interest:"
                 :rules="requiredRules"
                 required
               ></v-textarea>
-              <v-row>
-                <v-col> <h2>FAMILY MEMBERS</h2></v-col>
-                <v-col>
-                  <v-btn @click="addDependent" color="secondary">
-                    Add family member
-                  </v-btn></v-col
-                >
-              </v-row>
+
+              <h2>FAMILY MEMBERS</h2>
+              <p>
+                In order for us to proceed with the due diligence process, we
+                also require personal information about any family member who
+                may be included in your Personal Application.
+              </p>
+
+              <v-btn @click="addDependent" color="secondary" class="mb-4">
+                Add family member
+              </v-btn>
 
               <div v-for="(dependent, index) in form.dependents" :key="index">
                 <v-text-field
@@ -284,7 +288,11 @@ Partners office and program of interest:"
                 </v-select>
               </div>
               <h2>BANKING REFERENCE</h2>
-
+              <p>
+                Please note that funds must generally be remitted from your
+                personal bank account. Funds will be wired to Henley from the
+                following bank account:
+              </p>
               <v-text-field
                 v-model="form.bankName"
                 :rules="requiredRules"
@@ -294,7 +302,7 @@ Partners office and program of interest:"
               <v-text-field
                 v-model="form.iban"
                 :rules="requiredRules"
-                label="Account Number or IBAN)"
+                label="Account Number or IBAN"
                 required
               ></v-text-field>
               <v-text-field
@@ -415,6 +423,7 @@ Partners office and program of interest:"
               >Print PDF</v-btn
             ></v-card-actions
           >
+          <!-- <form-steps /> -->
         </v-card>
       </div>
     </v-main>
@@ -426,6 +435,7 @@ import PdfContent from "@/components/PdfContent";
 import VueHtml2pdf from "vue-html2pdf";
 import CalendarInput from "./components/CalendarInput.vue";
 import AddressInput from "./components/AddressInput.vue";
+// import FormSteps from "./components/FormSteps.vue";
 
 export default {
   name: "app",
@@ -594,6 +604,7 @@ export default {
     PdfContent,
     CalendarInput,
     AddressInput,
+    // FormSteps,
   },
 };
 </script>
