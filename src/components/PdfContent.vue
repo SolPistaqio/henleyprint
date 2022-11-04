@@ -477,7 +477,7 @@
             }}</span>
           </div>
           <p>
-            <span v-if="form.beneficiaries.length >= 2">
+            <span v-if="form.beneficiary && form.beneficiaries.length >= 2">
               <v-icon> mdi-checkbox-marked </v-icon> Tick here if there are
               additional beneficial owners, in which case an additional Form A
               should be attached with the details of these additional beneficial
@@ -628,7 +628,7 @@
         </v-row>
       </div>
     </section>
-    <div v-if="form.beneficiaries.length >= 2">
+    <div v-if="form.beneficiary && form.beneficiaries.length >= 2">
       <div class="html2pdf__page-break"></div>
       <section class="pdf-content">
         <div class="wrapper">
