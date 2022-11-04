@@ -337,7 +337,7 @@
           <h1>4. BENEFICIAL OWNER DECLARATION</h1>
           <p>I the undersigned herewith declare:</p>
           <div class="boolfield">
-            <span v-if="!form.beneficiary">
+            <span v-if="form.beneficiary">
               <v-icon> mdi-checkbox-blank-outline</v-icon>that I am the ultimate
               beneficial owner of all funds remitted to Henley. Please continue
               to clause 5. <br />
