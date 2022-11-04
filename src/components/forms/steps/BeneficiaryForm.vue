@@ -114,9 +114,10 @@
 
 <script>
 import AddressInput from "../elements/AddressInput.vue";
+import CalendarInput from "../elements/CalendarInput.vue";
 export default {
   name: "BeneficiaryForm",
-  components: { AddressInput },
+  components: { AddressInput, CalendarInput },
   props: {
     modelValue: {
       type: Object,
