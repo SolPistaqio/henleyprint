@@ -21,6 +21,14 @@
         (are):
       </p>
       <div v-for="(beneficiary, index) in form.beneficiaries" :key="index">
+        <v-btn
+          style="float: right"
+          icon
+          color="error"
+          v-if="index > 0"
+          @click="removeBeneficiary(index)"
+          ><v-icon>mdi-delete</v-icon></v-btn
+        >
         <v-text-field
           v-model="beneficiary.firstname"
           :rules="requiredRules"
@@ -31,9 +39,7 @@
 
         <v-text-field
           v-model="beneficiary.othername"
-          :rules="requiredRules"
           label="Other name(s)"
-          required
           @input="input"
         ></v-text-field>
 
@@ -162,6 +168,9 @@ export default {
         businessAddress: "",
         relationship: "",
       });
+    },
+    removeBeneficiary(index) {
+      this.form.beneficiaries.splice(index, 1);
     },
   },
 };

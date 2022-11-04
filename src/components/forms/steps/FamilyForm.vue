@@ -11,6 +11,13 @@
     </v-btn>
 
     <div v-for="(dependent, index) in form.dependents" :key="index">
+      <v-btn
+        style="float: right"
+        icon
+        color="error"
+        @click="removeDependent(index)"
+        ><v-icon>mdi-delete</v-icon></v-btn
+      >
       <v-text-field
         v-model="dependent.firstname"
         :rules="requiredRules"
@@ -70,6 +77,9 @@ export default {
         lastname: "",
         relationship: "",
       });
+    },
+    removeDependent(index) {
+      this.form.dependents.splice(index, 1);
     },
   },
 };
