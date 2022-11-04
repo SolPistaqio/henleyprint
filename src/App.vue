@@ -1,5 +1,4 @@
 <template>
-  <!-- add steps!!  -->
   <v-app>
     <v-main>
       <div id="app" data-app>
@@ -20,13 +19,13 @@
           ref="html2Pdf"
         >
           <pdf-content
+            v-if="form"
             @domRendered="domRendered()"
             slot="pdf-content"
             :form="form"
           />
         </vue-html2pdf>
-
-        <form-steps />
+        <form-steps @print="downloadPdf" />
       </div>
     </v-main>
   </v-app>
@@ -35,84 +34,18 @@
 <script>
 import PdfContent from "@/components/PdfContent";
 import VueHtml2pdf from "vue-html2pdf";
-
 import FormSteps from "./components/FormSteps.vue";
-import { activities } from "./activityData.js";
 
 export default {
   name: "app",
 
   data() {
     return {
-      valid: false,
-      form: {
-        firstname: "",
-        lastname: "",
-        othername: "",
-        nationality: "",
-        placeOfBirth: "",
-        date: null,
-        address: "",
-        email: "",
-        occupation: "",
-        activities: "",
-        businessName: "",
-        businessAddress: "",
-        purpose: "",
-        program: "",
-        pep: "",
-        association: "",
-        associationDesc: "",
-        rejected: "",
-        rejectedDesc: "",
-        rejectedByHenley: "",
-        rejectedByHenleyDesc: "",
-        clientOfHenley: "",
-        clientOfHenleyDesc: "",
-        dependents: [],
-        bankName: "",
-        iban: "",
-        swift: "",
-        bank: "",
-        bankAddress: "",
-        beneficiary: "",
-        beneficiaries: [
-          {
-            firstname: "",
-            lastname: "",
-            othername: "",
-            nationality: "",
-            placeOfBirth: "",
-            date: null,
-            address: "",
-            businessName: "",
-            businessAddress: "",
-            relationship: "",
-            menu: false,
-          },
-        ],
-        processing: "",
-        data: "",
-      },
-      activities: activities,
-      purposes: ["Business", "Travel", "Education"],
-      relationships: ["Mother", "Father", "Child"],
-      activePicker: null,
-      menu: false,
-      menuBeneficiary: false,
-      requiredRules: [(v) => !!v || "This field is required"],
-      requiredRulesRadio: [
-        (v) => typeof v === "boolean" || "This field is required",
-      ],
-
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) => /.+@.+/.test(v) || "E-mail must be valid",
-      ],
       contentRendered: false,
       progress: 0,
       generatingPdf: false,
       pdfDownloaded: false,
+      form: null,
     };
   },
 
@@ -123,37 +56,9 @@ export default {
   },
 
   methods: {
-    save(date) {
-      this.$refs.menu.save(date);
-    },
-
-    addDependent() {
-      this.form.dependents.push({
-        firstname: "",
-        lastname: "",
-        relationship: "",
-      });
-    },
-    addBeneficiaries() {
-      this.form.beneficiaries.push({
-        firstname: "",
-        lastname: "",
-        othername: "",
-        nationality: "",
-        placeOfBirth: "",
-        date: null,
-        address: "",
-        businessName: "",
-        businessAddress: "",
-        relationship: "",
-      });
-    },
-    async downloadPdf() {
+    async downloadPdf(form) {
+      this.form = form;
       await this.$refs.html2Pdf.generatePdf();
-      // const valid = this.$refs.form.validate();
-      // if (valid) {
-      //   await this.$refs.html2Pdf.generatePdf();
-      // }
     },
 
     onProgress(progress) {
@@ -208,7 +113,6 @@ export default {
   components: {
     VueHtml2pdf,
     PdfContent,
-
     FormSteps,
   },
 };

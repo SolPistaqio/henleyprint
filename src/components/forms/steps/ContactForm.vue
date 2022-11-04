@@ -1,5 +1,5 @@
 <template>
-  <div ref="form">
+  <div>
     <v-text-field
       v-model="form.firstname"
       :rules="requiredRules"

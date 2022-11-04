@@ -1,37 +1,41 @@
 <template>
-  <div ref="form">
+  <div>
+    <p>
+      Please note that funds must generally be remitted from your personal bank
+      account. Funds will be wired to Henley from the following bank account:
+    </p>
     <v-text-field
-      v-model="form.occupation"
-      label="Occupation"
+      v-model="form.bankName"
       :rules="requiredRules"
+      label="Account in name of (should be in your personal name)"
       required
       @input="input"
     ></v-text-field>
-
-    <v-autocomplete
-      chips
-      deletable-chips
-      multiple
-      v-model="form.activities"
-      label="Business activities"
-      :items="activities"
-      :rules="requiredRules"
-      required
-      @change="input"
-    ></v-autocomplete>
-
     <v-text-field
-      v-model="form.businessName"
-      label="Business name"
-      hint="Name of the company"
+      v-model="form.iban"
       :rules="requiredRules"
+      label="Account Number or IBAN"
+      required
+      @input="input"
+    ></v-text-field>
+    <v-text-field
+      v-model="form.swift"
+      :rules="requiredRules"
+      label="SWIFT code"
+      required
+      @input="input"
+    ></v-text-field>
+    <v-text-field
+      v-model="form.bank"
+      :rules="requiredRules"
+      label="Bank name"
       required
       @input="input"
     ></v-text-field>
 
     <address-input
-      v-model="form.businessAddress"
-      label="Business address"
+      v-model="form.bankAddress"
+      label="Bank location"
       :rules="requiredRules"
       required
       @input="input"
@@ -41,9 +45,8 @@
 
 <script>
 import AddressInput from "../elements/AddressInput.vue";
-import { activities } from "@/activityData.js";
 export default {
-  name: "BusinessForm",
+  name: "BankForm",
   components: { AddressInput },
   props: {
     modelValue: {
@@ -54,12 +57,12 @@ export default {
     return {
       valid: false,
       form: {
-        occupation: "",
-        activities: "",
-        businessName: "",
-        businessAddress: "",
+        bankName: "",
+        iban: "",
+        swift: "",
+        bank: "",
+        bankAddress: "",
       },
-      activities: activities,
       requiredRules: [(v) => !!v || "This field is required"],
     };
   },
