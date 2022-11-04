@@ -110,12 +110,16 @@
                 required
               ></v-text-field>
 
-              <v-text-field
+              <v-autocomplete
+                chips
+                deletable-chips
+                multiple
                 v-model="form.activities"
                 label="Business activities"
+                :items="activities"
                 :rules="requiredRules"
                 required
-              ></v-text-field>
+              ></v-autocomplete>
 
               <v-text-field
                 v-model="form.businessName"
@@ -436,6 +440,7 @@ import VueHtml2pdf from "vue-html2pdf";
 import CalendarInput from "./components/CalendarInput.vue";
 import AddressInput from "./components/AddressInput.vue";
 // import FormSteps from "./components/FormSteps.vue";
+import { activities } from "./activityData.js";
 
 export default {
   name: "app",
@@ -492,6 +497,7 @@ export default {
         processing: "",
         data: "",
       },
+      activities: activities,
       purposes: ["Business", "Travel", "Education"],
       relationships: ["Mother", "Father", "Child"],
       activePicker: null,
@@ -512,11 +518,13 @@ export default {
       pdfDownloaded: false,
     };
   },
+
   watch: {
     menu(val) {
       val && setTimeout(() => (this.activePicker = "YEAR"));
     },
   },
+
   methods: {
     save(date) {
       this.$refs.menu.save(date);

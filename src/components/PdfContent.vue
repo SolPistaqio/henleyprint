@@ -83,7 +83,7 @@
           <p>Business activities:</p>
           <div class="field">
             <span>
-              {{ form.activities }}
+              {{ form.activities.toString() }}
             </span>
           </div>
           <p>Business name and address:</p>
@@ -142,7 +142,6 @@
             you are in doubt whether you qualify as PEP or not, please tick Yes
             above.
           </p>
-
           <p>
             Do you have any association with a previous applicant or an
             individual with an ongoing application for the program of interest
@@ -158,6 +157,40 @@
               <v-icon> mdi-checkbox-blank-outline</v-icon> Yes
             </span>
           </div>
+        </div>
+        <v-row style="margin-bottom: 0px, padding-bottom: 0px">
+          <v-col>
+            <div class="bottom">
+              <p>
+                HP Due Diligence Form A V211017
+
+                <br />
+                Copyright © 2021 by Henley &amp; Partners Group Holdings Ltd.
+                All rights reserved.
+              </p>
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+    </section>
+    <div class="html2pdf__page-break"></div>
+    <section class="pdf-content">
+      <div class="wrapper">
+        <v-row>
+          <v-col>
+            <div style="border-bottom: 1px solid #75767a; margin: 0px">
+              <v-img
+                style="margin-bottom: 17px"
+                contain
+                height="35px"
+                src="../assets/logo.png"
+                lazy-src="../assets/logo.png"
+              ></v-img>
+            </div>
+          </v-col>
+        </v-row>
+
+        <div class="page">
           <p>
             If you ticked yes, please enter name of individual(s) and describe
             relationship:
@@ -216,40 +249,6 @@
               }}
             </span>
           </div>
-        </div>
-        <v-row style="margin-bottom: 0px, padding-bottom: 0px">
-          <v-col>
-            <div class="bottom">
-              <p>
-                HP Due Diligence Form A V211017
-
-                <br />
-                Copyright © 2021 by Henley &amp; Partners Group Holdings Ltd.
-                All rights reserved.
-              </p>
-            </div>
-          </v-col>
-        </v-row>
-      </div>
-    </section>
-    <div class="html2pdf__page-break"></div>
-    <section class="pdf-content">
-      <div class="wrapper">
-        <v-row>
-          <v-col>
-            <div style="border-bottom: 1px solid #75767a; margin: 0px">
-              <v-img
-                style="margin-bottom: 17px"
-                contain
-                height="35px"
-                src="../assets/logo.png"
-                lazy-src="../assets/logo.png"
-              ></v-img>
-            </div>
-          </v-col>
-        </v-row>
-
-        <div class="page">
           <p>
             Have you or has one of your dependents been a client of Henley &amp;
             Partners before?
@@ -386,6 +385,40 @@
                 : "N/A"
             }}</span>
           </div>
+        </div>
+        <v-row style=" margin-bottom: 0px, padding-bottom: 0px">
+          <v-col>
+            <div class="bottom">
+              <p>
+                HP Due Diligence Form A V211017
+
+                <br />
+                Copyright © 2021 by Henley &amp; Partners Group Holdings Ltd.
+                All rights reserved.
+              </p>
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+    </section>
+    <div class="html2pdf__page-break"></div>
+    <section class="pdf-content">
+      <div class="wrapper">
+        <v-row>
+          <v-col>
+            <div style="border-bottom: 1px solid #75767a; margin: 0px">
+              <v-img
+                style="margin-bottom: 17px"
+                contain
+                height="35px"
+                src="../assets/logo.png"
+                lazy-src="../assets/logo.png"
+              ></v-img>
+            </div>
+          </v-col>
+        </v-row>
+
+        <div class="page">
           <p>Place of birth:</p>
           <div class="field">
             <span>{{
@@ -457,40 +490,6 @@
               beneficial owners.
             </span>
           </p>
-        </div>
-        <v-row style=" margin-bottom: 0px, padding-bottom: 0px">
-          <v-col>
-            <div class="bottom">
-              <p>
-                HP Due Diligence Form A V211017
-
-                <br />
-                Copyright © 2021 by Henley &amp; Partners Group Holdings Ltd.
-                All rights reserved.
-              </p>
-            </div>
-          </v-col>
-        </v-row>
-      </div>
-    </section>
-    <div class="html2pdf__page-break"></div>
-    <section class="pdf-content">
-      <div class="wrapper">
-        <v-row>
-          <v-col>
-            <div style="border-bottom: 1px solid #75767a; margin: 0px">
-              <v-img
-                style="margin-bottom: 17px"
-                contain
-                height="35px"
-                src="../assets/logo.png"
-                lazy-src="../assets/logo.png"
-              ></v-img>
-            </div>
-          </v-col>
-        </v-row>
-
-        <div class="page last">
           <h1>5. ACKNOWLEDGEMENT AND AUTHORIZATION</h1>
           <p>
             I acknowledge and agree that completion and submission of this Form
@@ -560,6 +559,39 @@
             provide Henley with a written confirmation of such person’s consent
             upon Henley’s request.
           </p>
+        </div>
+        <v-row style=" margin-bottom: 0px, padding-bottom: 0px">
+          <v-col>
+            <div class="bottom">
+              <p>
+                HP Due Diligence Form A V211017
+
+                <br />
+                Copyright © 2021 by Henley &amp; Partners Group Holdings Ltd.
+                All rights reserved.
+              </p>
+            </div>
+          </v-col>
+        </v-row>
+      </div>
+    </section>
+    <div class="html2pdf__page-break"></div>
+    <section class="pdf-content">
+      <div class="wrapper">
+        <v-row>
+          <v-col>
+            <div style="border-bottom: 1px solid #75767a; margin: 0px">
+              <v-img
+                style="margin-bottom: 17px"
+                contain
+                height="35px"
+                src="../assets/logo.png"
+                lazy-src="../assets/logo.png"
+              ></v-img>
+            </div>
+          </v-col>
+        </v-row>
+        <div class="page last">
           <h1>7. DECLARATION</h1>
           <p>
             I hereby confirm that the information provided in this Form A, is
@@ -627,11 +659,6 @@ export default {
   width: 100%;
   //height: 1400px;
   background: #fff;
-  padding: 17px 47px 17px 47px;
-  font-family: "Times New Roman", Times, serif;
-  font-weight: 200;
-  line-height: 1.2;
-  font-size: 13px;
 }
 .wrapper {
   display: flex;
@@ -639,6 +666,11 @@ export default {
   justify-content: space-between;
   align-content: space-between;
   height: 1000px;
+  padding: 17px 47px 17px 47px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 200;
+  line-height: 1.3;
+  font-size: 15px;
 }
 
 .page {
