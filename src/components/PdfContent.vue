@@ -628,6 +628,110 @@
         </v-row>
       </div>
     </section>
+    <div v-if="form.beneficiaries.length >= 2">
+      <div class="html2pdf__page-break"></div>
+      <section class="pdf-content">
+        <div class="wrapper">
+          <v-row>
+            <v-col>
+              <div style="border-bottom: 1px solid #75767a; margin: 0px">
+                <v-img
+                  style="margin-bottom: 17px"
+                  contain
+                  height="35px"
+                  src="../assets/logo.png"
+                  lazy-src="../assets/logo.png"
+                ></v-img>
+              </div>
+            </v-col>
+          </v-row>
+          <div class="page last">
+            <h1>Attachment</h1>
+            <p>Additional beneficial owners</p>
+            <div
+              v-for="(beneficiary, index) in form.beneficiaries.slice(1)"
+              :key="index"
+            >
+              <p>Surname:</p>
+              <div class="field">
+                <span>{{ beneficiary.lastname }}</span>
+              </div>
+
+              <p>First name(s):</p>
+              <div class="field">
+                <span>{{ beneficiary.firstname }}</span>
+              </div>
+              <p>Other name(s) you are known by:</p>
+              <div class="field">
+                <span>{{ beneficiary.othername }}</span>
+              </div>
+              <p>Nationality:</p>
+              <div class="field">
+                <span>{{ beneficiary.nationality }}</span>
+              </div>
+              <p>Place of birth:</p>
+              <div class="field">
+                <span>{{ beneficiary.placeOfBirth }}</span>
+              </div>
+              <p>Date of birth:</p>
+              <div class="field">
+                <span>{{ beneficiary.date }}</span>
+              </div>
+              <p>Permanent residential address:</p>
+              <div class="field">
+                <span>{{
+                  beneficiary.address
+                    ? beneficiary.address.street +
+                      " " +
+                      beneficiary.address.city +
+                      " " +
+                      beneficiary.address.country +
+                      " " +
+                      beneficiary.address.zip
+                    : "N/A"
+                }}</span>
+              </div>
+              <p>Business name and address:</p>
+              <div class="field">
+                <span>
+                  {{
+                    beneficiary.businessName +
+                    " " +
+                    beneficiary.businessAddress.street +
+                    " " +
+                    beneficiary.businessAddress.city +
+                    " " +
+                    beneficiary.businessAddress.country +
+                    " " +
+                    beneficiary.businessAddress.zip
+                  }}
+                </span>
+              </div>
+              <p>
+                What is the connection between you and the beneficial owner of
+                the funds?:
+              </p>
+              <div class="field">
+                <span>{{ beneficiary.relationship }}</span>
+              </div>
+            </div>
+          </div>
+          <v-row style=" margin-bottom: 0px, padding-bottom: 0px">
+            <v-col>
+              <div class="bottom">
+                <p>
+                  HP Due Diligence Form A V211017
+
+                  <br />
+                  Copyright © 2021 by Henley &amp; Partners Group Holdings Ltd.
+                  All rights reserved.
+                </p>
+              </div>
+            </v-col>
+          </v-row>
+        </div>
+      </section>
+    </div>
   </section>
 </template>
 <script>

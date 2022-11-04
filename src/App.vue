@@ -393,6 +393,26 @@ Partners office and program of interest:"
                     :valid="beneficiary.date ? true : false"
                   />
 
+                  <address-input
+                    v-model="beneficiary.address"
+                    label="Permanent residential address"
+                    :rules="requiredRules"
+                    required
+                  />
+
+                  <v-text-field
+                    v-model="beneficiary.businessName"
+                    label="Business name"
+                    :rules="requiredRules"
+                    required
+                  ></v-text-field>
+                  <address-input
+                    v-model="beneficiary.businessAddress"
+                    label="Business address"
+                    :rules="requiredRules"
+                    required
+                  />
+
                   <v-select
                     v-model="beneficiary.relationship"
                     label="Relationship"
