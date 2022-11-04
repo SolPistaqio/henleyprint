@@ -71,7 +71,6 @@ export default {
   },
   data() {
     return {
-      valid: false,
       form: {
         firstname: "",
         lastname: "",
@@ -82,8 +81,7 @@ export default {
         address: "",
         email: "",
       },
-      requiredRules: [(v) => !!v || "This field is required"],
-
+      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
       emailRules: [
         (v) => !!v || "E-mail is required",
         (v) => /.+@.+/.test(v) || "E-mail must be valid",

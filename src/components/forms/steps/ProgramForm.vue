@@ -33,12 +33,11 @@ export default {
   },
   data() {
     return {
-      valid: false,
       form: {
         purpose: "",
         program: "",
       },
-      requiredRules: [(v) => !!v || "This field is required"],
+      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
       purposes: ["Business", "Travel", "Education"],
     };
   },

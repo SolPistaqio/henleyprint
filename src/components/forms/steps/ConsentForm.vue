@@ -28,7 +28,6 @@ export default {
   },
   data() {
     return {
-      valid: false,
       form: {
         processing: "",
         data: "",

@@ -124,7 +124,6 @@ export default {
   },
   data() {
     return {
-      valid: false,
       form: {
         beneficiary: "",
         beneficiaries: [
@@ -143,7 +142,7 @@ export default {
           },
         ],
       },
-      requiredRules: [(v) => !!v || "This field is required"],
+      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
       requiredRulesRadio: [
         (v) => typeof v === "boolean" || "This field is required",
       ],

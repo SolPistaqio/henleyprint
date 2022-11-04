@@ -15,7 +15,7 @@
       v-model="form.activities"
       label="Business activities"
       :items="activities"
-      :rules="requiredRules"
+      :rules="requiredChoice"
       required
       @change="input"
     ></v-autocomplete>
@@ -52,7 +52,6 @@ export default {
   },
   data() {
     return {
-      valid: false,
       form: {
         occupation: "",
         activities: "",
@@ -60,7 +59,8 @@ export default {
         businessAddress: "",
       },
       activities: activities,
-      requiredRules: [(v) => !!v || "This field is required"],
+      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
+      requiredChoice: [(v) => !!v || "This field is required"],
     };
   },
 

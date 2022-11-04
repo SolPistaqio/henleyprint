@@ -55,7 +55,6 @@ export default {
   },
   data() {
     return {
-      valid: false,
       form: {
         bankName: "",
         iban: "",
@@ -63,7 +62,7 @@ export default {
         bank: "",
         bankAddress: "",
       },
-      requiredRules: [(v) => !!v || "This field is required"],
+      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
     };
   },
 

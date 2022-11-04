@@ -58,11 +58,10 @@ export default {
   },
   data() {
     return {
-      valid: false,
       form: {
         dependents: [],
       },
-      requiredRules: [(v) => !!v || "This field is required"],
+      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
       relationships: ["Mother", "Father", "Child"],
     };
   },

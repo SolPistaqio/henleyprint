@@ -282,7 +282,7 @@
           </p>
           <p>Full name(s) of family members / relationship to Client:</p>
           <div class="field">
-            <span v-if="form.dependents && form.dependents.length > 1">
+            <span v-if="form.dependents">
               <span v-for="(dependent, index) in form.dependents" :key="index">
                 {{ dependent.firstname }} {{ dependent.lastname }} -
                 {{ dependent.relationship }} <br />
