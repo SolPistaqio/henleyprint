@@ -49,7 +49,7 @@ export default {
   data() {
     return {
       form: { street: null, city: null, country: null, zip: null },
-      requiredRules: [(v) => !!v || "This field is required"],
+      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
     };
   },
   methods: {
