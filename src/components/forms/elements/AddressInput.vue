@@ -36,7 +36,7 @@
 
 <script>
 export default {
-  //prop: ["value"],
+  name: "AddressInput",
   props: {
     label: {
       type: String,
