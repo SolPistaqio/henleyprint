@@ -95,15 +95,13 @@
           @input="input"
         />
 
-        <v-select
+        <v-text-field
           v-model="beneficiary.relationship"
           label="Relationship"
-          :items="relationships"
           :rules="requiredRules"
           required
-          @change="input"
-        >
-        </v-select>
+          @input="input"
+        ></v-text-field>
       </div>
       <v-btn @click="addBeneficiaries" color="secondary" class="my-4">
         Add beneficial owner
@@ -115,6 +113,7 @@
 <script>
 import AddressInput from "../elements/AddressInput.vue";
 import CalendarInput from "../elements/CalendarInput.vue";
+import { requiredRules, requiredRulesRadio } from "@/formData.js";
 export default {
   name: "BeneficiaryForm",
   components: { AddressInput, CalendarInput },
@@ -143,11 +142,8 @@ export default {
           },
         ],
       },
-      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
-      requiredRulesRadio: [
-        (v) => typeof v === "boolean" || "This field is required",
-      ],
-      relationships: ["Mother", "Father", "Child"],
+      requiredRules: requiredRules,
+      requiredRulesRadio: requiredRulesRadio,
     };
   },
 

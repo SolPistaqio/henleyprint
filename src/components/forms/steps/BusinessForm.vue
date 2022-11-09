@@ -8,17 +8,13 @@
       @input="input"
     ></v-text-field>
 
-    <v-autocomplete
-      chips
-      deletable-chips
-      multiple
+    <v-text-field
       v-model="form.activities"
       label="Business activities"
-      :items="activities"
-      :rules="requiredChoice"
+      :rules="requiredRules"
       required
-      @change="input"
-    ></v-autocomplete>
+      @input="input"
+    ></v-text-field>
 
     <v-text-field
       v-model="form.businessName"
@@ -41,7 +37,7 @@
 
 <script>
 import AddressInput from "../elements/AddressInput.vue";
-import { activities } from "@/activityData.js";
+import { requiredRules } from "@/formData.js";
 export default {
   name: "BusinessForm",
   components: { AddressInput },
@@ -58,9 +54,8 @@ export default {
         businessName: "",
         businessAddress: "",
       },
-      activities: activities,
-      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
-      requiredChoice: [(v) => !!v || "This field is required"],
+
+      requiredRules: requiredRules,
     };
   },
 

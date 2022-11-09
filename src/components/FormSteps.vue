@@ -155,7 +155,7 @@ export default {
   methods: {
     nextStep(n) {
       const valid = this.$refs[n][0].validate();
-
+      console.log(this.$refs[n][0]);
       if (valid) {
         this.e1 = n + 1;
         this.valid = false;

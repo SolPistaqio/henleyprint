@@ -114,6 +114,8 @@ Partners office and program of interest:"
 </template>
 
 <script>
+import { requiredRulesRadio, requiredRules } from "@/formData.js";
+
 export default {
   name: "LegalForm",
 
@@ -135,10 +137,8 @@ export default {
         clientOfHenley: "",
         clientOfHenleyDesc: "",
       },
-      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
-      requiredRulesRadio: [
-        (v) => typeof v === "boolean" || "This field is required",
-      ],
+      requiredRules: requiredRules,
+      requiredRulesRadio: requiredRulesRadio,
     };
   },
 

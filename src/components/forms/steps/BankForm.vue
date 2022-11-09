@@ -11,20 +11,22 @@
       required
       @input="input"
     ></v-text-field>
+
     <v-text-field
       v-model="form.iban"
-      :rules="requiredRules"
+      :rules="bankRules.first"
       label="Account Number or IBAN"
-      required
       @input="input"
+      ref="bank"
     ></v-text-field>
     <v-text-field
       v-model="form.swift"
-      :rules="requiredRules"
+      :rules="bankRules.second"
       label="SWIFT code"
-      required
       @input="input"
+      ref="bank"
     ></v-text-field>
+
     <v-text-field
       v-model="form.bank"
       :rules="requiredRules"
@@ -45,6 +47,7 @@
 
 <script>
 import AddressInput from "../elements/AddressInput.vue";
+import { requiredRules } from "@/formData.js";
 export default {
   name: "BankForm",
   components: { AddressInput },
@@ -62,13 +65,46 @@ export default {
         bank: "",
         bankAddress: "",
       },
-      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
+      requiredRules: requiredRules,
     };
   },
 
+  computed: {
+    validator() {
+      return (
+        !this.form.swift &&
+        !this.form.swift.trim() &&
+        !this.form.iban &&
+        !this.form.iban.trim()
+      );
+    },
+    bankRules() {
+      const valid =
+        !this.form.swift &&
+        !this.form.swift.trim() &&
+        !this.form.iban &&
+        !this.form.iban.trim();
+
+      return {
+        first: [() => !valid || "Swift or Account number is required"],
+        second: [() => !valid || "Swift or Account number is required"],
+      };
+    },
+    bankInputs() {
+      return this.form.swift && this.form.iban;
+    },
+  },
   methods: {
     input() {
       this.$emit("input", this.form);
+    },
+  },
+  watch: {
+    bankInputs: {
+      async handler() {
+        await this.$nextTick();
+        this.$refs.bank.validate();
+      },
     },
   },
 };

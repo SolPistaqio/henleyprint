@@ -1,14 +1,14 @@
 <template>
   <div>
-    <v-select
+    <v-text-field
       v-model="form.purpose"
       label="Purpose of seeking alternative citizenship / residence"
-      :items="purposes"
+      hint="Country of application"
+      persistent-hint
       :rules="requiredRules"
       required
-      @change="input"
-    >
-    </v-select>
+      @input="input"
+    ></v-text-field>
 
     <v-text-field
       v-model="form.program"
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { requiredRules } from "@/formData";
 export default {
   name: "ProgramForm",
 
@@ -37,7 +38,7 @@ export default {
         purpose: "",
         program: "",
       },
-      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
+      requiredRules: requiredRules,
       purposes: ["Business", "Travel", "Education"],
     };
   },

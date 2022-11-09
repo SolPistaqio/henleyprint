@@ -61,6 +61,7 @@
 <script>
 import CalendarInput from "../elements/CalendarInput.vue";
 import AddressInput from "../elements/AddressInput.vue";
+import { requiredRules, emailRules } from "@/formData";
 export default {
   name: "ContactForm",
   components: { CalendarInput, AddressInput },
@@ -81,14 +82,8 @@ export default {
         address: "",
         email: "",
       },
-      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
-      emailRules: [
-        (v) => !!v || "E-mail is required",
-        (v) =>
-          !v ||
-          /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(v) ||
-          "E-mail must be valid",
-      ],
+      requiredRules: requiredRules,
+      emailRules: emailRules,
     };
   },
 

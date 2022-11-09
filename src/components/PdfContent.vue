@@ -83,7 +83,7 @@
           <p>Business activities:</p>
           <div class="field">
             <span>
-              {{ form.activities.toString() }}
+              {{ form.activities }}
             </span>
           </div>
           <p>Business name and address:</p>

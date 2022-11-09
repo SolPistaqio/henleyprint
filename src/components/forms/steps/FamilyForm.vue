@@ -48,6 +48,7 @@
 </template>
 
 <script>
+import { relationships, requiredRules } from "@/formData.js";
 export default {
   name: "FamilyForm",
 
@@ -61,8 +62,8 @@ export default {
       form: {
         dependents: [],
       },
-      requiredRules: [(v) => (!!v && !!v.trim()) || "This field is required"],
-      relationships: ["Mother", "Father", "Child"],
+      requiredRules: requiredRules,
+      relationships: relationships,
     };
   },
 
